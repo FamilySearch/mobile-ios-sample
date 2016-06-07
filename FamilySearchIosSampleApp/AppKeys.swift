@@ -10,7 +10,7 @@ import Foundation
 
 class AppKeys : NSObject
 {
-    static let API_KEY = "your_key"
+    static let API_KEY = "your key"
 }
 
         
