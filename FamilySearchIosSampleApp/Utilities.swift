@@ -10,6 +10,8 @@ import Foundation
 
 class Utilities: NSObject {
     
+    static let KEY_ACCESS_TOKEN = "access_token";
+    
     static func getUrlsFromCollections(completionHandler:(response:Links, error:NSError?) -> ())
     {
         let collectionUrlString = "https://familysearch.org/platform/collection"
@@ -21,7 +23,7 @@ class Utilities: NSObject {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
         let headers: [NSObject : AnyObject] = ["Accept":"application/json"];
         configuration.HTTPAdditionalHeaders = headers;
-        let session = NSURLSession(configuration: configuration);
+        let session = NSURLSession(configuration: configuration)
         
         
         let configurationUrlTask = session.dataTaskWithURL(collectionUrl!) {(data, response, error) in
@@ -40,11 +42,11 @@ class Utilities: NSObject {
                             //print("links = \(links)");
                             
                             // get the url to get the token
-                            if let endpointUrlObject = links["http://oauth.net/core/2.0/endpoint/authorize"] as? [String : AnyObject]
+                            if let tokenUrlObject = links["http://oauth.net/core/2.0/endpoint/token"] as? [String : AnyObject]
                             {
-                                if let endpointUrlString = endpointUrlObject["href"] as? String
+                                if let tokenUrlString = tokenUrlObject["href"] as? String
                                 {
-                                    linksObject.tokenUrlString = endpointUrlString
+                                    linksObject.tokenUrlString = tokenUrlString
                                 }
                             }
                             
