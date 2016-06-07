@@ -77,6 +77,11 @@ class LoginVC: UIViewController {
                         let preferences = NSUserDefaults.standardUserDefaults()
                         preferences.setValue(token, forKey: Utilities.KEY_ACCESS_TOKEN)
                         preferences.synchronize()
+                        
+                        // push to the next view controller, in the main thread
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.performSegueWithIdentifier("segueToTabBar", sender: nil)
+                            })
                     }
                 }
                 catch
