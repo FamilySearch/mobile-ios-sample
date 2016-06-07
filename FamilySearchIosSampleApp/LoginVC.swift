@@ -33,7 +33,10 @@ class LoginVC: UIViewController {
             Utilities.getUrlsFromCollections({ (response, error) -> Void in
                 if (error == nil)
                 {
-                    self.getToken(response.tokenUrlString!, username: username, password: password, client_id: AppKeys.API_KEY)
+                    self.getToken(response.tokenUrlString!,
+                        username: username,
+                        password: password,
+                        client_id: AppKeys.API_KEY)
                 }
                 else
                 {
@@ -47,7 +50,7 @@ class LoginVC: UIViewController {
         }
     }
     
-    func getToken(tokenUrlAsString : String, username : String, password : String, client_id : String) -> String {
+    func getToken(tokenUrlAsString : String, username : String, password : String, client_id : String) {
         let grant_type = "password";
         
         let params = "?username=" + username +
@@ -93,8 +96,60 @@ class LoginVC: UIViewController {
         }
         
         task.resume()
-        
-        return "";
+    }
+    
+    // get the user data
+    
+// MARK: - Segue methods
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if (segue.identifier == "segueToTabBar")
+        {
+            let tabBarController : UITabBarController = (segue.destinationViewController as? UITabBarController)!
+            
+            let treeTVC : TreeTVC = (tabBarController.viewControllers![0] as? TreeTVC)!
+            
+            // need to pass a User object
+            treeTVC.test = "Some Test"
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

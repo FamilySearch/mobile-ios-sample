@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AA1D06628D009ADBDB /* AppKeys.swift */; };
+		A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */; };
 		A00FDD3D1D02755700C7384B /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FDD3C1D02755700C7384B /* Links.swift */; };
 		A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D9FD11D023344005473BD /* AppDelegate.swift */; };
 		A01D9FD41D023344005473BD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D9FD31D023344005473BD /* LoginVC.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		A00BB4AA1D06628D009ADBDB /* AppKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKeys.swift; sourceTree = "<group>"; };
+		A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTVC.swift; sourceTree = "<group>"; };
 		A00FDD3C1D02755700C7384B /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		A01D9FCE1D023344005473BD /* FamilySearchIosSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilySearchIosSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D9FD11D023344005473BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A00BB4AE1D0673DD009ADBDB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A01D9FD31D023344005473BD /* LoginVC.swift */,
+				A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		A01D9FC51D023344005473BD = {
 			isa = PBXGroup;
 			children = (
@@ -63,7 +74,7 @@
 				A0D6047D1D03D98200F2A83D /* Utils */,
 				A04E89561D023ACE00148656 /* Model */,
 				A01D9FD11D023344005473BD /* AppDelegate.swift */,
-				A01D9FD31D023344005473BD /* LoginVC.swift */,
+				A00BB4AE1D0673DD009ADBDB /* ViewControllers */,
 				A01D9FD51D023344005473BD /* Main.storyboard */,
 				A01D9FD81D023344005473BD /* Assets.xcassets */,
 				A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */,
@@ -164,6 +175,7 @@
 				A00FDD3D1D02755700C7384B /* Links.swift in Sources */,
 				A0D6047F1D03D99A00F2A83D /* Utilities.swift in Sources */,
 				A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */,
+				A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */,
 				A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

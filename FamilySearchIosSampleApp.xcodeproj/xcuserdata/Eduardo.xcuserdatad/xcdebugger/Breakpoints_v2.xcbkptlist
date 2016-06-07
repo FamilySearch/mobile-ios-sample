@@ -2,4 +2,84 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FamilySearchIosSampleApp/TreeTVC.swift"
+            timestampString = "486963161.497348"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "TreeTVC"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FamilySearchIosSampleApp.TreeTVC.test.getter : Swift.String"
+                  moduleName = "FamilySearchIosSampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Eduardo/Documents/Code/FamilySearch/mobile-ios-sample/FamilySearchIosSampleApp/TreeTVC.swift"
+                  timestampString = "486963177.811114"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "53">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FamilySearchIosSampleApp.TreeTVC.init (style : __C.UITableViewStyle) -&gt; FamilySearchIosSampleApp.TreeTVC"
+                  moduleName = "FamilySearchIosSampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Eduardo/Documents/Code/FamilySearch/mobile-ios-sample/FamilySearchIosSampleApp/TreeTVC.swift"
+                  timestampString = "486963177.811459"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FamilySearchIosSampleApp.TreeTVC.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; FamilySearchIosSampleApp.TreeTVC"
+                  moduleName = "FamilySearchIosSampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Eduardo/Documents/Code/FamilySearch/mobile-ios-sample/FamilySearchIosSampleApp/TreeTVC.swift"
+                  timestampString = "486963177.811602"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FamilySearchIosSampleApp.TreeTVC.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;FamilySearchIosSampleApp.TreeTVC&gt;"
+                  moduleName = "FamilySearchIosSampleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Eduardo/Documents/Code/FamilySearch/mobile-ios-sample/FamilySearchIosSampleApp/TreeTVC.swift"
+                  timestampString = "486963177.811742"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

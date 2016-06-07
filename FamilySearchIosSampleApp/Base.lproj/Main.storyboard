@@ -78,7 +78,7 @@
         <!--Item-->
         <scene sceneID="fDv-dW-nMu">
             <objects>
-                <tableViewController id="7Ef-zT-K2F" sceneMemberID="viewController">
+                <tableViewController id="7Ef-zT-K2F" customClass="TreeTVC" customModule="FamilySearchIosSampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fGl-xk-oWw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
