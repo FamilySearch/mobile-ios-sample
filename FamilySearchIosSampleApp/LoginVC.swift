@@ -12,9 +12,12 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var usernameTextFiew: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.stopAnimating()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +27,8 @@ class LoginVC: UIViewController {
     
     @IBAction func loginAction(sender: AnyObject)
     {
+        activityIndicator.startAnimating()
+        
         let username = usernameTextFiew.text!
         let password = passwordTextField.text!
 
@@ -69,6 +74,7 @@ class LoginVC: UIViewController {
                 else
                 {
                     print("Error getting collections data from server. Error = \(error?.description)")
+                    self.activityIndicator.stopAnimating()
                 }
             })
         }
@@ -186,6 +192,8 @@ class LoginVC: UIViewController {
             // need to pass a User object
             
             treeTVC.user = sender as! User;
+            
+            self.activityIndicator.stopAnimating()
         }
     }
 }

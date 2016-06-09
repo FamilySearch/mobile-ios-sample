@@ -55,17 +55,24 @@
                                     <constraint firstItem="Wkf-k2-AOD" firstAttribute="centerX" secondItem="AF0-A7-qNz" secondAttribute="centerX" id="seF-Ya-SGI"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lKV-UQ-Uhl">
+                                <rect key="frame" x="282" y="281.5" width="37" height="37"/>
+                                <color key="color" red="0.4941176471" green="0.49803921569999998" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AF0-A7-qNz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0lL-Qc-mF0"/>
+                            <constraint firstItem="lKV-UQ-Uhl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7yp-OO-Nfq"/>
                             <constraint firstItem="AF0-A7-qNz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="23" id="AH5-cb-LbW"/>
+                            <constraint firstItem="lKV-UQ-Uhl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="G3U-JA-CMp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AF0-A7-qNz" secondAttribute="trailing" id="Sne-ii-Rtp"/>
                             <constraint firstAttribute="leadingMargin" secondItem="AF0-A7-qNz" secondAttribute="leading" id="XlL-M1-DsJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7yi-gW-WHg"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="lKV-UQ-Uhl" id="Zlx-pl-uFi"/>
                         <outlet property="passwordTextField" destination="VYl-9e-FTv" id="Wr1-3A-i8m"/>
                         <outlet property="usernameTextFiew" destination="Wkf-k2-AOD" id="NbK-2D-lP0"/>
                         <segue destination="8fr-uN-lL0" kind="show" identifier="segueToTabBar" id="GTg-wd-YER"/>
