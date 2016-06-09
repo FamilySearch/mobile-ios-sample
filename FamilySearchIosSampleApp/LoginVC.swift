@@ -30,13 +30,41 @@ class LoginVC: UIViewController {
         if ( !(username.isEmpty) && !(password.isEmpty))
         {
             // get initial GET call to collections
-            Utilities.getUrlsFromCollections({ (response, error) -> Void in
+            Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
                 if (error == nil)
                 {
-                    self.getToken(response.tokenUrlString!,
+                    // get the login token
+                    self.getToken(collectionsResponse.tokenUrlString!,
                         username: username,
                         password: password,
-                        client_id: AppKeys.API_KEY)
+                        client_id: AppKeys.API_KEY,
+                        completionToken: {(responseToken, errorToken) -> Void in
+                            if (errorToken != nil)
+                            {
+                                // TODO: handle case when somehow the token is nil
+                            }
+                            else
+                            {
+                                // get user data, with the newly acquired token
+                                self.getCurrentUserData(collectionsResponse.currentUserString!,
+                                    accessToken: responseToken!,
+                                    completionCurrentUser:{(responseUser, errorUser) -> Void in
+                                        if (errorUser != nil)
+                                        {
+                                            // TODO: handle case when somehow the user data is nil
+                                        }
+                                        else
+                                        {
+                                            // all login data needed has been downloaded
+                                            // push to the next view controller, in the main thread
+                                            dispatch_async(dispatch_get_main_queue(),{
+                                                self.performSegueWithIdentifier("segueToTabBar", sender: responseUser)
+                                            })
+                                        }
+                                })
+                            }
+                        }
+                    )
                 }
                 else
                 {
@@ -50,7 +78,7 @@ class LoginVC: UIViewController {
         }
     }
     
-    func getToken(tokenUrlAsString : String, username : String, password : String, client_id : String) {
+    func getToken(tokenUrlAsString : String, username : String, password : String, client_id : String, completionToken:(responseToken:String?, errorToken:NSError?) -> ()) {
         let grant_type = "password";
         
         let params = "?username=" + username +
@@ -68,6 +96,7 @@ class LoginVC: UIViewController {
             if (error != nil)
             {
                 print("Error downloading token. Error: \(error)")
+                completionToken(responseToken: nil, errorToken: error)
             }
             else
             {
@@ -80,11 +109,8 @@ class LoginVC: UIViewController {
                         let preferences = NSUserDefaults.standardUserDefaults()
                         preferences.setValue(token, forKey: Utilities.KEY_ACCESS_TOKEN)
                         preferences.synchronize()
-                        
-                        // push to the next view controller, in the main thread
-                        dispatch_async(dispatch_get_main_queue(),{
-                            self.performSegueWithIdentifier("segueToTabBar", sender: nil)
-                            })
+                    
+                        completionToken(responseToken: token, errorToken: nil)
                     }
                 }
                 catch
@@ -99,6 +125,55 @@ class LoginVC: UIViewController {
     }
     
     // get the user data
+    func getCurrentUserData(currentUserUrlString : String, accessToken : String, completionCurrentUser:(responseUser:User?, errorUser:NSError?) -> ())
+    {
+        let currentUserUrl = NSURL(string: currentUserUrlString);
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
+        let headers: [NSObject : AnyObject] = ["Accept":"application/json", "Authorization":"Bearer " + accessToken];
+        
+        configuration.HTTPAdditionalHeaders = headers;
+        let session = NSURLSession(configuration: configuration)
+        
+        let currentUserTask = session.dataTaskWithURL(currentUserUrl!) { (data, currentUserResponse, errorUserData) in
+            // parse the currentUser data
+            do
+            {
+                let currentUserJson = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments);
+                
+                if let usersJsonObject = currentUserJson["users"] as? [[String : AnyObject]]
+                {
+                    let user = User()
+                    let userJsonObject = usersJsonObject.first!
+                    
+                    user.id = userJsonObject["id"] as? String
+                    user.contactName = userJsonObject["contactName"] as? String
+                    user.helperAccessPin = userJsonObject["helperAccessPin"] as? String
+                    user.givenName = userJsonObject["givenName"] as? String
+                    user.familyName = userJsonObject["familyName"] as? String
+                    user.email = userJsonObject["email"] as? String
+                    user.country = userJsonObject["country"] as? String
+                    user.gender = userJsonObject["gender"] as? String
+                    user.birthDate = userJsonObject["birthDate"] as? String
+                    user.phoneNumber = userJsonObject["phoneNumber"] as? String
+                    user.mailingAddress = userJsonObject["mailingAddress"] as? String
+                    user.preferredLanguage = userJsonObject["preferredLanguage"] as? String
+                    user.displayName = userJsonObject["displayName"] as? String
+                    user.personId = userJsonObject["personId"] as? String
+                    user.treeUserId = userJsonObject["treeUserId"] as? String
+                    
+                    completionCurrentUser(responseUser:user, errorUser:nil)
+                }
+
+            }
+            catch
+            {
+                completionCurrentUser(responseUser:nil, errorUser:errorUserData)
+            }
+        }
+        currentUserTask.resume()
+        
+    }
     
 // MARK: - Segue methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
@@ -108,9 +183,9 @@ class LoginVC: UIViewController {
             let tabBarController : UITabBarController = (segue.destinationViewController as? UITabBarController)!
             
             let treeTVC : TreeTVC = (tabBarController.viewControllers![0] as? TreeTVC)!
-            
             // need to pass a User object
-            treeTVC.test = "Some Test"
+            
+            treeTVC.user = sender as! User;
         }
     }
 }
