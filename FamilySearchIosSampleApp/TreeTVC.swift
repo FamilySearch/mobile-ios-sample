@@ -19,19 +19,28 @@ class TreeTVC: UITableViewController {
         
         // get the access token from NSUserDefaults
         let preferences = NSUserDefaults.standardUserDefaults()
-        let accessToken = preferences.valueForKey(Utilities.KEY_ACCESS_TOKEN)
+        let accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
         
         // get url for family tree from Collections
         Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
             if (error == nil)
             {
                 // download the Ancestry query url
-                self.getAncestryQueryUrlAsString(collectionsResponse.familyTreeUrlString!)
+                self.getAncestryQueryUrlAsString(collectionsResponse.familyTreeUrlString!,
+                    completionQuery: {(responseTemplate, errorQuery) -> Void in
+                        if (errorQuery == nil)
+                        {
+                            print("template url = \(responseTemplate!)")
+                            
+                            // getAncestryTree
+                            self.getAncestryTree(responseTemplate!, userPersonId: self.user.personId!, accessToken: accessToken!)
+                        }
+                })
             }
         })
     }
     
-    func getAncestryQueryUrlAsString(familyTreeUrlAsString : String) -> ()
+    func getAncestryQueryUrlAsString(familyTreeUrlAsString : String, completionQuery:(responseTemplate:String?, errorQuery:NSError?) -> ())
     {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
         let headers: [NSObject : AnyObject] = ["Accept":"application/json"];
@@ -51,16 +60,22 @@ class TreeTVC: UITableViewController {
                     let links = collection["links"] as? NSDictionary
                     let ancestryQuery = links!["ancestry-query"] as? NSDictionary
                     let template = ancestryQuery!["template"] as! String
-                    print("template = \(template)")
+                    completionQuery(responseTemplate:template, errorQuery:nil)
                 }
 
             }
             catch
             {
-                
+                print("Error parsing the ancestry-query")
+                completionQuery(responseTemplate:nil, errorQuery:familyTreeError)
             }
         }
         familyTreeTask.resume()
     }
     
+    // getAncestryTree
+    func getAncestryTree(ancestryUrlString:String, userPersonId:String, accessToken:String) ->()
+    {
+        // TODO
+    }
 }
