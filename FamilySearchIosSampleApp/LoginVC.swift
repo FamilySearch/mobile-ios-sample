@@ -137,7 +137,6 @@ class LoginVC: UIViewController {
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
         let headers: [NSObject : AnyObject] = ["Accept":"application/json", "Authorization":"Bearer " + accessToken];
-        
         configuration.HTTPAdditionalHeaders = headers;
         let session = NSURLSession(configuration: configuration)
         
