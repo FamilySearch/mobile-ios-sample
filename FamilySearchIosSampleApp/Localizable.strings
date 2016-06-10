@@ -13,3 +13,4 @@
 "usernamePlaceholderText" = "Username";
 "passwordPlaceholderText" = "Password";
 "loginText" = "Login";
+"loginDataUsage" = "This app would like to know your basic FamilySearch profile information and access data about your ancestors from the FamilySearch family tree.\nThis app will use this information in accordance with their respective terms of service and privacy policies.";

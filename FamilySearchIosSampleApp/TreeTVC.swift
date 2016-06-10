@@ -125,6 +125,7 @@ class TreeTVC: UITableViewController {
                         // get the display.name string
                         let display = eachPerson["display"] as! NSDictionary
                         let displayName = display["name"] as! String
+                        let lifespan = display["lifespan"] as! String
                         
                         // get the links.person.href string
                         let links = eachPerson["links"] as! NSDictionary
@@ -132,6 +133,7 @@ class TreeTVC: UITableViewController {
                         let personLinkHref = personLink["href"] as! String
                         
                         person.displayName = displayName
+                        person.lifespan = lifespan
                         person.personLinkHref = personLinkHref
                         arrayOfPersons.addObject(person)
                     }
@@ -163,9 +165,12 @@ class TreeTVC: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell : UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("PersonCell")! as UITableViewCell
+        let cell : PersonCell = self.tableView.dequeueReusableCellWithIdentifier("PersonCell")! as! PersonCell
         
-        cell.textLabel?.text = personArray.objectAtIndex(indexPath.row).displayName
+        let person = personArray.objectAtIndex(indexPath.row) as! Person
+        cell.ancestorName.text = person.displayName
+        cell.ancestorLifespan.text = person.lifespan
+        
         return cell
     }
 }

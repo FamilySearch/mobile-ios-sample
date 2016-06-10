@@ -14,6 +14,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButtonOutlet: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var dataUsageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class LoginVC: UIViewController {
         usernameTextFiew.placeholder = NSLocalizedString("usernamePlaceholderText", comment: "username, in email form")
         passwordTextField.placeholder = NSLocalizedString("passwordPlaceholderText", comment: "password")
         loginButtonOutlet.setTitle(NSLocalizedString("loginText", comment: "text for login button"), forState: UIControlState.Normal)
+        dataUsageLabel.text = NSLocalizedString("loginDataUsage", comment: "description of data usage")
     }
 
     override func didReceiveMemoryWarning() {

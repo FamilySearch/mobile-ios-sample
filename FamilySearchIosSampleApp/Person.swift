@@ -12,5 +12,7 @@ class Person: NSObject
 {
     var displayName : String?
     
+    var lifespan : String?
+    
     var personLinkHref : String?
 }
