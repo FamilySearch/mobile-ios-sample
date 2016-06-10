@@ -14,6 +14,8 @@ class TreeTVC: UITableViewController {
     
     var user : User!
     
+    var personArray = NSArray()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,10 +32,22 @@ class TreeTVC: UITableViewController {
                     completionQuery: {(responseTemplate, errorQuery) -> Void in
                         if (errorQuery == nil)
                         {
-                            print("template url = \(responseTemplate!)")
+                            //print("template url = \(responseTemplate!)")
                             
                             // getAncestryTree
-                            self.getAncestryTree(responseTemplate!, userPersonId: self.user.personId!, accessToken: accessToken!)
+                            self.getAncestryTree(responseTemplate!,
+                                userPersonId: self.user.personId!,
+                                accessToken: accessToken!,
+                                completionTree:{(responsePersons, errorTree) -> Void in
+                                    if (errorTree == nil)
+                                    {
+                                        // set the received array, update table
+                                        self.personArray = responsePersons! as NSArray as! [Person]
+                                        dispatch_async(dispatch_get_main_queue(),{
+                                            self.tableView.reloadData()
+                                        })
+                                    }
+                                })
                         }
                 })
             }
@@ -59,7 +73,11 @@ class TreeTVC: UITableViewController {
                     let collection = collectionsJsonObject.first!
                     let links = collection["links"] as? NSDictionary
                     let ancestryQuery = links!["ancestry-query"] as? NSDictionary
-                    let template = ancestryQuery!["template"] as! String
+                    let entireTemplate = ancestryQuery!["template"] as! String
+                    
+                    // need to split the template URL, and get the left side of the { symbol
+                    let templateSplit = entireTemplate.componentsSeparatedByString("{")
+                    let template = templateSplit[0]
                     completionQuery(responseTemplate:template, errorQuery:nil)
                 }
 
@@ -74,8 +92,127 @@ class TreeTVC: UITableViewController {
     }
     
     // getAncestryTree
-    func getAncestryTree(ancestryUrlString:String, userPersonId:String, accessToken:String) ->()
+    func getAncestryTree(ancestryRootUrlString:String,
+                         userPersonId:String, accessToken:String,
+                         completionTree:(responsePersons:NSMutableArray?, errorTree:NSError?) ->())
     {
-        // TODO
+        var ancestryUrlString = ancestryRootUrlString + "?" + "person=" + userPersonId
+        ancestryUrlString = ancestryUrlString + "&" + "generations=" + "4"
+        
+        let ancestryUrl = NSURL(string: ancestryUrlString);
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
+        let headers: [NSObject : AnyObject] = ["Accept":"application/json", "Authorization":"Bearer " + accessToken];
+        configuration.HTTPAdditionalHeaders = headers;
+        let session = NSURLSession(configuration: configuration)
+        
+        let ancestryTreeTask = session.dataTaskWithURL(ancestryUrl!) { (ancestryData, ancestryResponse, ancestryError) in
+            if (ancestryError == nil)
+            {
+                do
+                {
+                    let ancestryDataJson = try NSJSONSerialization.JSONObjectWithData(ancestryData!, options: .AllowFragments);
+                    //print("ancestryDataJson = \(ancestryDataJson)")
+                    
+                    let persons = ancestryDataJson["persons"] as? [[String : AnyObject]]
+                    let arrayOfPersons = NSMutableArray()
+                    
+                    for eachPerson in persons!
+                    {
+                        let person = Person()
+                        //print("eachPerson = \(eachPerson)")
+                        
+                        // get the display.name string
+                        let display = eachPerson["display"] as! NSDictionary
+                        let displayName = display["name"] as! String
+                        
+                        // get the links.person.href string
+                        let links = eachPerson["links"] as! NSDictionary
+                        let personLink = links["person"] as! NSDictionary
+                        let personLinkHref = personLink["href"] as! String
+                        
+                        person.displayName = displayName
+                        person.personLinkHref = personLinkHref
+                        arrayOfPersons.addObject(person)
+                    }
+                    
+                    completionTree(responsePersons: arrayOfPersons, errorTree: nil)
+                }
+                catch
+                {
+                    print("Error getting ancestry tree data. Error = \(ancestryError)")
+                    completionTree(responsePersons: nil, errorTree: ancestryError)
+                }
+            }
+            else
+            {
+                completionTree(responsePersons: nil, errorTree: ancestryError)
+            }
+        }
+        
+        ancestryTreeTask.resume()
+    }
+    
+    // MARK: - Table View Controller methods
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.personArray.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell : UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("PersonCell")! as UITableViewCell
+        
+        cell.textLabel?.text = personArray.objectAtIndex(indexPath.row).displayName
+        return cell
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

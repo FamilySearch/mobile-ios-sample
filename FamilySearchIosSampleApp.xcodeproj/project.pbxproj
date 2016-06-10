@@ -16,6 +16,8 @@
 		A01D9FD71D023344005473BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FD51D023344005473BD /* Main.storyboard */; };
 		A01D9FD91D023344005473BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FD81D023344005473BD /* Assets.xcassets */; };
 		A01D9FDC1D023344005473BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */; };
+		A0296F0E1D0A60B000FAE4E0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0296F0D1D0A60B000FAE4E0 /* Person.swift */; };
+		A05168E41D09EDDA005E7EE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A05168E31D09EDDA005E7EE9 /* Localizable.strings */; };
 		A0D6047F1D03D99A00F2A83D /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D6047E1D03D99A00F2A83D /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		A01D9FD81D023344005473BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A01D9FDB1D023344005473BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A01D9FDD1D023344005473BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0296F0D1D0A60B000FAE4E0 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		A05168E31D09EDDA005E7EE9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A0D6047E1D03D99A00F2A83D /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +86,7 @@
 				A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */,
 				A01D9FDD1D023344005473BD /* Info.plist */,
 				A00BB4AA1D06628D009ADBDB /* AppKeys.swift */,
+				A05168E31D09EDDA005E7EE9 /* Localizable.strings */,
 			);
 			path = FamilySearchIosSampleApp;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			children = (
 				A00FDD3C1D02755700C7384B /* Links.swift */,
 				A00150AE1D08FF76008E53E8 /* User.swift */,
+				A0296F0D1D0A60B000FAE4E0 /* Person.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -163,6 +169,7 @@
 			files = (
 				A01D9FDC1D023344005473BD /* LaunchScreen.storyboard in Resources */,
 				A01D9FD91D023344005473BD /* Assets.xcassets in Resources */,
+				A05168E41D09EDDA005E7EE9 /* Localizable.strings in Resources */,
 				A01D9FD71D023344005473BD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +187,7 @@
 				A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */,
 				A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */,
 				A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */,
+				A0296F0E1D0A60B000FAE4E0 /* Person.swift in Sources */,
 				A00150AF1D08FF76008E53E8 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

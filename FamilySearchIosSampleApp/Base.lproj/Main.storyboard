@@ -38,7 +38,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="lQh-yI-aK8" secondAttribute="bottom" constant="8" id="9fI-ip-OG5"/>
                                     <constraint firstItem="Wkf-k2-AOD" firstAttribute="leading" secondItem="AF0-A7-qNz" secondAttribute="leading" constant="8" id="BDN-Ob-ZjO"/>
@@ -73,6 +73,7 @@
                     <navigationItem key="navigationItem" id="7yi-gW-WHg"/>
                     <connections>
                         <outlet property="activityIndicator" destination="lKV-UQ-Uhl" id="Zlx-pl-uFi"/>
+                        <outlet property="loginButtonOutlet" destination="lQh-yI-aK8" id="UDB-cH-ysZ"/>
                         <outlet property="passwordTextField" destination="VYl-9e-FTv" id="Wr1-3A-i8m"/>
                         <outlet property="usernameTextFiew" destination="Wkf-k2-AOD" id="NbK-2D-lP0"/>
                         <segue destination="8fr-uN-lL0" kind="show" identifier="segueToTabBar" id="GTg-wd-YER"/>
@@ -91,7 +92,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jbt-lG-rh8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonCell" id="jbt-lG-rh8">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbt-lG-rh8" id="nqE-ca-cZM">

@@ -1,0 +1,15 @@
+/* 
+  LocalizableStrings.strings
+  FamilySearchIosSampleApp
+
+  Created by Eduardo Flores on 6/9/16.
+  Copyright © 2016 FamilySearch. All rights reserved.
+*/
+
+// Error messages
+"loginErrorToken" = "Error getting the token. Check username and password";
+
+// Login activity
+"usernamePlaceholderText" = "Username";
+"passwordPlaceholderText" = "Password";
+"loginText" = "Login";
