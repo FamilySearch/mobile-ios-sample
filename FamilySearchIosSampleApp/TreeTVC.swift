@@ -16,12 +16,14 @@ class TreeTVC: UITableViewController {
     
     var personArray = NSArray()
     
+    var accessToken : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // get the access token from NSUserDefaults
         let preferences = NSUserDefaults.standardUserDefaults()
-        let accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
+        accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
         
         // get url for family tree from Collections
         Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
@@ -37,7 +39,7 @@ class TreeTVC: UITableViewController {
                             // getAncestryTree
                             self.getAncestryTree(responseTemplate!,
                                 userPersonId: self.user.personId!,
-                                accessToken: accessToken!,
+                                accessToken: self.accessToken!,
                                 completionTree:{(responsePersons, errorTree) -> Void in
                                     if (errorTree == nil)
                                     {
@@ -155,6 +157,22 @@ class TreeTVC: UITableViewController {
         ancestryTreeTask.resume()
     }
     
+    // helper function to download images
+    func getDataFromUrl(urlAsString:String, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void))
+    {
+        // this is the url of the default image
+        // notice that this url is HTTP, which means that the app has to allow arbitraty loads for non-HTTPS calls.
+        // This can be found under Target > Info > App Transport Security Settings
+        let defaultImageUrl = "http://fsicons.org/wp-content/uploads/2014/10/gender-unknown-circle-2XL.png"
+        
+        var imageUrlString = urlAsString + "/portrait"
+        imageUrlString = imageUrlString + "?access_token=" + accessToken!;
+        imageUrlString = imageUrlString + "&default=" + defaultImageUrl;
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: imageUrlString)!) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+    
     // MARK: - Table View Controller methods
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1;
@@ -170,6 +188,14 @@ class TreeTVC: UITableViewController {
         let person = personArray.objectAtIndex(indexPath.row) as! Person
         cell.ancestorName.text = person.displayName
         cell.ancestorLifespan.text = person.lifespan
+        
+        //print("personLinkHref \(person.personLinkHref)")
+        
+        getDataFromUrl(person.personLinkHref!) { (data, response, error)  in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                cell.ancestorPicture.image = UIImage(data: data!)
+            }
+        }
         
         return cell
     }
