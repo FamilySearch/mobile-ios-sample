@@ -193,7 +193,9 @@ class LoginVC: UIViewController {
         if (segue.identifier == "segueToTabBar")
         {
             let tabBarController : UITabBarController = (segue.destinationViewController as? UITabBarController)!
-            
+            tabBarController.tabBar.items![0].title = NSLocalizedString("tabAncestorsName", comment: "name for list tab")
+            tabBarController.tabBar.items![1].title = NSLocalizedString("tabMemoriesName", comment: "name for memories tab")
+
             let treeTVC : TreeTVC = (tabBarController.viewControllers![0] as? TreeTVC)!
             // need to pass a User object
             

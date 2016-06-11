@@ -81,4 +81,20 @@ class Utilities: NSObject {
         
         configurationUrlTask.resume()
     }
+    
+    // helper function to download images
+    static func getImageFromUrl(urlAsString:String, accessToken:String, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void))
+    {
+        // this is the url of the default image
+        // notice that this url is HTTP, which means that the app has to allow arbitraty loads for non-HTTPS calls.
+        // This can be found under Target > Info > App Transport Security Settings
+        let defaultImageUrl = "http://fsicons.org/wp-content/uploads/2014/10/gender-unknown-circle-2XL.png"
+        
+        var imageUrlString = urlAsString + "/portrait"
+        imageUrlString = imageUrlString + "?access_token=" + accessToken;
+        imageUrlString = imageUrlString + "&default=" + defaultImageUrl;
+        NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: imageUrlString)!) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
 }
