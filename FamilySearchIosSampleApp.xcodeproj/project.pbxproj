@@ -16,6 +16,7 @@
 		A01D9FD71D023344005473BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FD51D023344005473BD /* Main.storyboard */; };
 		A01D9FD91D023344005473BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FD81D023344005473BD /* Assets.xcassets */; };
 		A01D9FDC1D023344005473BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */; };
+		A025A93F1D0BCB180058B22A /* PersonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025A93E1D0BCB180058B22A /* PersonDetails.swift */; };
 		A0296F0E1D0A60B000FAE4E0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0296F0D1D0A60B000FAE4E0 /* Person.swift */; };
 		A0296F111D0A688A00FAE4E0 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0296F101D0A688A00FAE4E0 /* PersonCell.swift */; };
 		A043B8BC1D0B489100548718 /* AncestorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043B8BB1D0B489100548718 /* AncestorDetails.swift */; };
@@ -35,6 +36,7 @@
 		A01D9FD81D023344005473BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A01D9FDB1D023344005473BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A01D9FDD1D023344005473BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A025A93E1D0BCB180058B22A /* PersonDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetails.swift; sourceTree = "<group>"; };
 		A0296F0D1D0A60B000FAE4E0 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A0296F101D0A688A00FAE4E0 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		A043B8BB1D0B489100548718 /* AncestorDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AncestorDetails.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				A00FDD3C1D02755700C7384B /* Links.swift */,
 				A00150AE1D08FF76008E53E8 /* User.swift */,
 				A0296F0D1D0A60B000FAE4E0 /* Person.swift */,
+				A025A93E1D0BCB180058B22A /* PersonDetails.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */,
 				A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */,
 				A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */,
+				A025A93F1D0BCB180058B22A /* PersonDetails.swift in Sources */,
 				A043B8BC1D0B489100548718 /* AncestorDetails.swift in Sources */,
 				A0296F0E1D0A60B000FAE4E0 /* Person.swift in Sources */,
 				A00150AF1D08FF76008E53E8 /* User.swift in Sources */,
