@@ -273,7 +273,7 @@
         <!--Item 2-->
         <scene sceneID="AUm-yg-4hh">
             <objects>
-                <viewController id="pXd-K7-W2C" sceneMemberID="viewController">
+                <viewController id="pXd-K7-W2C" customClass="MemoriesVC" customModule="FamilySearchIosSampleApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FEO-mI-aik"/>
                         <viewControllerLayoutGuide type="bottom" id="zgF-Yd-vDF"/>

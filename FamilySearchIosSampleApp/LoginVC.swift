@@ -174,6 +174,12 @@ class LoginVC: UIViewController {
                     user.personId = userJsonObject["personId"] as? String
                     user.treeUserId = userJsonObject["treeUserId"] as? String
                     
+                    // The Memories activity will need the URL that comes from user.links.artifact.href
+                    // in order to get the memories data
+                    let links = userJsonObject["links"] as! NSDictionary
+                    let artifacts = links["artifacts"] as! NSDictionary
+                    user.artifactsHref = artifacts["href"] as? String
+                    
                     completionCurrentUser(responseUser:user, errorUser:nil)
                 }
 
@@ -197,9 +203,11 @@ class LoginVC: UIViewController {
             tabBarController.tabBar.items![1].title = NSLocalizedString("tabMemoriesName", comment: "name for memories tab")
 
             let treeTVC : TreeTVC = (tabBarController.viewControllers![0] as? TreeTVC)!
-            // need to pass a User object
+            // need to pass a User object to the tree table view controller
+            treeTVC.user = sender as! User
             
-            treeTVC.user = sender as! User;
+            let memoriesVC : MemoriesVC = (tabBarController.viewControllers![1] as? MemoriesVC)!
+            memoriesVC.user = sender as! User
             
             self.activityIndicator.stopAnimating()
         }

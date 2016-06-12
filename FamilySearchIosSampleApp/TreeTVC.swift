@@ -11,6 +11,7 @@ import UIKit
 class TreeTVC: UITableViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var navItemTitle: UINavigationItem!
     
     var user : User!
     
