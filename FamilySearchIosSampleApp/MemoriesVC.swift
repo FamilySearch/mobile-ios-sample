@@ -12,4 +12,8 @@ import UIKit
 class MemoriesVC : UIViewController
 {
     var user : User!
+    
+    override func viewDidLoad() {
+        print("memories url = \(user.artifactsHref!)")
+    }
 }
