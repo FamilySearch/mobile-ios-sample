@@ -11,13 +11,18 @@
 		A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AA1D06628D009ADBDB /* AppKeys.swift */; };
 		A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */; };
 		A00FDD3D1D02755700C7384B /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FDD3C1D02755700C7384B /* Links.swift */; };
+		A0151B321D10FBA6008DADD8 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0151B311D10FBA6008DADD8 /* MemoryCell.swift */; };
+		A01B4FBC1D0CFB3600E90D6D /* MemoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01B4FBB1D0CFB3600E90D6D /* MemoriesVC.swift */; };
 		A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D9FD11D023344005473BD /* AppDelegate.swift */; };
 		A01D9FD41D023344005473BD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D9FD31D023344005473BD /* LoginVC.swift */; };
 		A01D9FD71D023344005473BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FD51D023344005473BD /* Main.storyboard */; };
 		A01D9FD91D023344005473BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FD81D023344005473BD /* Assets.xcassets */; };
 		A01D9FDC1D023344005473BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */; };
+		A025A93F1D0BCB180058B22A /* PersonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025A93E1D0BCB180058B22A /* PersonDetails.swift */; };
 		A0296F0E1D0A60B000FAE4E0 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0296F0D1D0A60B000FAE4E0 /* Person.swift */; };
 		A0296F111D0A688A00FAE4E0 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0296F101D0A688A00FAE4E0 /* PersonCell.swift */; };
+		A03BAE511D106A91002572BA /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BAE501D106A91002572BA /* WaitingView.swift */; };
+		A043B8BC1D0B489100548718 /* AncestorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043B8BB1D0B489100548718 /* AncestorDetails.swift */; };
 		A05168E41D09EDDA005E7EE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A05168E31D09EDDA005E7EE9 /* Localizable.strings */; };
 		A0D6047F1D03D99A00F2A83D /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D6047E1D03D99A00F2A83D /* Utilities.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +32,8 @@
 		A00BB4AA1D06628D009ADBDB /* AppKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKeys.swift; sourceTree = "<group>"; };
 		A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTVC.swift; sourceTree = "<group>"; };
 		A00FDD3C1D02755700C7384B /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		A0151B311D10FBA6008DADD8 /* MemoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
+		A01B4FBB1D0CFB3600E90D6D /* MemoriesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoriesVC.swift; sourceTree = "<group>"; };
 		A01D9FCE1D023344005473BD /* FamilySearchIosSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilySearchIosSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D9FD11D023344005473BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A01D9FD31D023344005473BD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -34,8 +41,11 @@
 		A01D9FD81D023344005473BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A01D9FDB1D023344005473BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A01D9FDD1D023344005473BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A025A93E1D0BCB180058B22A /* PersonDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetails.swift; sourceTree = "<group>"; };
 		A0296F0D1D0A60B000FAE4E0 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A0296F101D0A688A00FAE4E0 /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		A03BAE501D106A91002572BA /* WaitingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		A043B8BB1D0B489100548718 /* AncestorDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AncestorDetails.swift; sourceTree = "<group>"; };
 		A05168E31D09EDDA005E7EE9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A0D6047E1D03D99A00F2A83D /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,6 +66,8 @@
 			children = (
 				A01D9FD31D023344005473BD /* LoginVC.swift */,
 				A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */,
+				A043B8BB1D0B489100548718 /* AncestorDetails.swift */,
+				A01B4FBB1D0CFB3600E90D6D /* MemoriesVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -79,13 +91,13 @@
 		A01D9FD01D023344005473BD /* FamilySearchIosSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				A01D9FD11D023344005473BD /* AppDelegate.swift */,
 				A0D6047D1D03D98200F2A83D /* Utils */,
 				A04E89561D023ACE00148656 /* Model */,
-				A01D9FD11D023344005473BD /* AppDelegate.swift */,
 				A00BB4AE1D0673DD009ADBDB /* ViewControllers */,
-				A0296F0F1D0A687900FAE4E0 /* TableCells */,
-				A01D9FD51D023344005473BD /* Main.storyboard */,
+				A0296F0F1D0A687900FAE4E0 /* Cells */,
 				A01D9FD81D023344005473BD /* Assets.xcassets */,
+				A01D9FD51D023344005473BD /* Main.storyboard */,
 				A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */,
 				A01D9FDD1D023344005473BD /* Info.plist */,
 				A00BB4AA1D06628D009ADBDB /* AppKeys.swift */,
@@ -94,12 +106,13 @@
 			path = FamilySearchIosSampleApp;
 			sourceTree = "<group>";
 		};
-		A0296F0F1D0A687900FAE4E0 /* TableCells */ = {
+		A0296F0F1D0A687900FAE4E0 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				A0296F101D0A688A00FAE4E0 /* PersonCell.swift */,
+				A0151B311D10FBA6008DADD8 /* MemoryCell.swift */,
 			);
-			name = TableCells;
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		A04E89561D023ACE00148656 /* Model */ = {
@@ -108,6 +121,7 @@
 				A00FDD3C1D02755700C7384B /* Links.swift */,
 				A00150AE1D08FF76008E53E8 /* User.swift */,
 				A0296F0D1D0A60B000FAE4E0 /* Person.swift */,
+				A025A93E1D0BCB180058B22A /* PersonDetails.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -116,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				A0D6047E1D03D99A00F2A83D /* Utilities.swift */,
+				A03BAE501D106A91002572BA /* WaitingView.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -193,12 +208,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A01D9FD41D023344005473BD /* LoginVC.swift in Sources */,
+				A01B4FBC1D0CFB3600E90D6D /* MemoriesVC.swift in Sources */,
+				A0151B321D10FBA6008DADD8 /* MemoryCell.swift in Sources */,
 				A00FDD3D1D02755700C7384B /* Links.swift in Sources */,
 				A0D6047F1D03D99A00F2A83D /* Utilities.swift in Sources */,
 				A0296F111D0A688A00FAE4E0 /* PersonCell.swift in Sources */,
 				A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */,
 				A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */,
 				A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */,
+				A03BAE511D106A91002572BA /* WaitingView.swift in Sources */,
+				A025A93F1D0BCB180058B22A /* PersonDetails.swift in Sources */,
+				A043B8BC1D0B489100548718 /* AncestorDetails.swift in Sources */,
 				A0296F0E1D0A60B000FAE4E0 /* Person.swift in Sources */,
 				A00150AF1D08FF76008E53E8 /* User.swift in Sources */,
 			);

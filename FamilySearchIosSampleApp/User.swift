@@ -39,4 +39,6 @@ class User: NSObject
     var preferredLanguage : String?
     
     var treeUserId : String?
+    
+    var artifactsHref : String?
 }

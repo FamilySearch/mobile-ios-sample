@@ -9,8 +9,18 @@
 // Error messages
 "loginErrorToken" = "Error getting the token. Check username and password";
 
+// Tab names
+"tabAncestorsName" = "Ancestors";
+"tabMemoriesName" = "Memories";
+
 // Login activity
 "usernamePlaceholderText" = "Username";
 "passwordPlaceholderText" = "Password";
 "loginText" = "Login";
-"loginDataUsage" = "This app would like to know your basic FamilySearch profile information and access data about your ancestors from the FamilySearch family tree.\nThis app will use this information in accordance with their respective terms of service and privacy policies.";
+"loginDataUsage" = "By clicking the \"LOGIN\" button, I agree to [Product Name] knowing my basic FamilySearch profile information and accessing data about my ancestors from the FamilySearch family tree. [Product Name] will use this information in accordance with their respective terms of service and privacy policies.";
+
+// Ancestor details Activity
+"ancestorDetailsTitle" = "Person";
+"ancestorDetailsBirth" = "Birth:";
+"ancestorDetailsDeath" = "Death:";
+
