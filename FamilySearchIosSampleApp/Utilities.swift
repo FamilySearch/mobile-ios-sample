@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Utilities: NSObject {
     
@@ -96,5 +97,30 @@ class Utilities: NSObject {
         NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: imageUrlString)!) { (data, response, error) in
             completion(data: data, response: response, error: error)
             }.resume()
+    }
+    
+    // helper function to display an activity indicator
+    static func displayWaitingView(view:UIView)
+    {
+        // creating a loading spinner on top of the table view controller, while data downloads
+        let waitingView = WaitingView(frame: CGRectMake(0, 0, view.frame.width, view.frame.height))
+        let spinnerWhileWaiting = UIActivityIndicatorView(frame: CGRectMake(view.frame.width / 2, view.frame.height / 2, 0, 0))
+        spinnerWhileWaiting.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        spinnerWhileWaiting.color = UIColor.lightGrayColor()
+        spinnerWhileWaiting.startAnimating()
+        waitingView.addSubview(spinnerWhileWaiting)
+        view.addSubview(waitingView)
+    }
+    
+    // helper function to remove the activity indicator created by displayWaitingView
+    static func removeWaitingView(view:UIView)
+    {
+        for eachView in view.subviews
+        {
+            if eachView.isKindOfClass(WaitingView)
+            {
+                eachView.removeFromSuperview()
+            }
+        }
     }
 }

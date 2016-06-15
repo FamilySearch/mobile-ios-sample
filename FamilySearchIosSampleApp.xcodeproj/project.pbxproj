@@ -11,6 +11,7 @@
 		A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AA1D06628D009ADBDB /* AppKeys.swift */; };
 		A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */; };
 		A00FDD3D1D02755700C7384B /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FDD3C1D02755700C7384B /* Links.swift */; };
+		A0151B321D10FBA6008DADD8 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0151B311D10FBA6008DADD8 /* MemoryCell.swift */; };
 		A01B4FBC1D0CFB3600E90D6D /* MemoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01B4FBB1D0CFB3600E90D6D /* MemoriesVC.swift */; };
 		A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D9FD11D023344005473BD /* AppDelegate.swift */; };
 		A01D9FD41D023344005473BD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D9FD31D023344005473BD /* LoginVC.swift */; };
@@ -31,6 +32,7 @@
 		A00BB4AA1D06628D009ADBDB /* AppKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKeys.swift; sourceTree = "<group>"; };
 		A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTVC.swift; sourceTree = "<group>"; };
 		A00FDD3C1D02755700C7384B /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		A0151B311D10FBA6008DADD8 /* MemoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
 		A01B4FBB1D0CFB3600E90D6D /* MemoriesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoriesVC.swift; sourceTree = "<group>"; };
 		A01D9FCE1D023344005473BD /* FamilySearchIosSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilySearchIosSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A01D9FD11D023344005473BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 				A04E89561D023ACE00148656 /* Model */,
 				A01D9FD11D023344005473BD /* AppDelegate.swift */,
 				A00BB4AE1D0673DD009ADBDB /* ViewControllers */,
-				A0296F0F1D0A687900FAE4E0 /* TableCells */,
+				A0296F0F1D0A687900FAE4E0 /* Cells */,
 				A01D9FD51D023344005473BD /* Main.storyboard */,
 				A01D9FD81D023344005473BD /* Assets.xcassets */,
 				A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */,
@@ -104,12 +106,13 @@
 			path = FamilySearchIosSampleApp;
 			sourceTree = "<group>";
 		};
-		A0296F0F1D0A687900FAE4E0 /* TableCells */ = {
+		A0296F0F1D0A687900FAE4E0 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				A0296F101D0A688A00FAE4E0 /* PersonCell.swift */,
+				A0151B311D10FBA6008DADD8 /* MemoryCell.swift */,
 			);
-			name = TableCells;
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		A04E89561D023ACE00148656 /* Model */ = {
@@ -206,6 +209,7 @@
 			files = (
 				A01D9FD41D023344005473BD /* LoginVC.swift in Sources */,
 				A01B4FBC1D0CFB3600E90D6D /* MemoriesVC.swift in Sources */,
+				A0151B321D10FBA6008DADD8 /* MemoryCell.swift in Sources */,
 				A00FDD3D1D02755700C7384B /* Links.swift in Sources */,
 				A0D6047F1D03D99A00F2A83D /* Utilities.swift in Sources */,
 				A0296F111D0A688A00FAE4E0 /* PersonCell.swift in Sources */,

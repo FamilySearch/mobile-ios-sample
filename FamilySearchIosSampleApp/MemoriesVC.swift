@@ -9,20 +9,43 @@
 import Foundation
 import UIKit
 
-class MemoriesVC : UIViewController
+class MemoriesVC : UICollectionViewController
 {
     var user : User!
     
+    let arrayOfImageThumbnailHrefs = NSMutableArray()
+    
+    var accessToken : String!
+    
     override func viewDidLoad() {
+        
+        // display waiting activity indicator
+        Utilities.displayWaitingView(self.view)
         
         // get the access token from NSUserDefaults
         let preferences = NSUserDefaults.standardUserDefaults()
-        let accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
+        accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
         
-        getMemoriesImagesForUser(accessToken!)
+        // get an array of the links of images
+        getMemoriesLinksForUser(accessToken!,
+                                 completionLinks: {(completionLinks, errorLinks) -> Void in
+                                    if (errorLinks == nil)
+                                    {
+                                        // update collection view to display images
+                                        dispatch_async(dispatch_get_main_queue(),
+                                            {
+                                                // remove waiting activity indicator
+                                                Utilities.removeWaitingView(self.view)
+                                                
+                                                // update collectionView
+                                                self.collectionView?.reloadData()
+                                            })
+                                    }
+        })
     }
     
-    func getMemoriesImagesForUser(accessToken:String) -> ()
+    func getMemoriesLinksForUser(accessToken:String,
+                                  completionLinks:(responseLinks:NSMutableArray?, errorLinks:NSError?) -> ())
     {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
         let headers: [NSObject : AnyObject] = ["Accept":"application/json", "Authorization":"Bearer " + accessToken];
@@ -44,20 +67,85 @@ class MemoriesVC : UIViewController
                         let links = sourceDescription["links"] as? NSDictionary
                         let linkImageThumbnail = links!["image-thumbnail"] as? NSDictionary
                         let linkImageThumbnailHref = linkImageThumbnail!["href"] as? String
-                        print("linkImageThumbnailHref = \(linkImageThumbnailHref!)")
+                        self.arrayOfImageThumbnailHrefs.addObject(linkImageThumbnailHref!)
                     }
                     else
                     {
                         continue
                     }
                 }
+                completionLinks(responseLinks: self.arrayOfImageThumbnailHrefs, errorLinks: nil)
             }
             catch
             {
-                
+                completionLinks(responseLinks: nil, errorLinks: memoriesError)
             }
         }
         memoriesTask.resume()
-
+    }
+    
+    // MARK: - UI Collection View Controller methods
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.arrayOfImageThumbnailHrefs.count
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemoryCell", forIndexPath: indexPath) as! MemoryCell
+        
+        let linkHref = arrayOfImageThumbnailHrefs.objectAtIndex(indexPath.row) as! String
+        Utilities.getImageFromUrl(linkHref, accessToken: accessToken) { (data, response, error)  in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                cell.memoryImageView.image = UIImage(data: data!)
+            }
+        }
+        
+        return cell
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,14 +22,7 @@ class TreeTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // creating a loading spinner on top of the table view controller, while data downloads
-        let waitingView = WaitingView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
-        let spinnerWhileWaiting = UIActivityIndicatorView(frame: CGRectMake(self.view.frame.width / 2, self.view.frame.height / 2, 0, 0))
-        spinnerWhileWaiting.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
-        spinnerWhileWaiting.color = UIColor.lightGrayColor()
-        spinnerWhileWaiting.startAnimating()
-        waitingView.addSubview(spinnerWhileWaiting)
-        self.view.addSubview(waitingView)
+        Utilities.displayWaitingView(self.view)
         
         // get the access token from NSUserDefaults
         let preferences = NSUserDefaults.standardUserDefaults()
@@ -58,13 +51,8 @@ class TreeTVC: UITableViewController {
                                         dispatch_async(dispatch_get_main_queue(),{
                                             
                                             // remove loading spinner view from tvc
-                                            for eachView in self.view.subviews
-                                            {
-                                                if eachView.isKindOfClass(WaitingView)
-                                                {
-                                                    eachView.removeFromSuperview()
-                                                }
-                                            }
+                                            Utilities.removeWaitingView(self.view)
+                                            
                                             // update table view
                                             self.tableView.reloadData()
                                         })
