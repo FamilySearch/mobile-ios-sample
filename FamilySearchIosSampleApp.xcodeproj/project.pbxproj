@@ -91,13 +91,13 @@
 		A01D9FD01D023344005473BD /* FamilySearchIosSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				A01D9FD11D023344005473BD /* AppDelegate.swift */,
 				A0D6047D1D03D98200F2A83D /* Utils */,
 				A04E89561D023ACE00148656 /* Model */,
-				A01D9FD11D023344005473BD /* AppDelegate.swift */,
 				A00BB4AE1D0673DD009ADBDB /* ViewControllers */,
 				A0296F0F1D0A687900FAE4E0 /* Cells */,
-				A01D9FD51D023344005473BD /* Main.storyboard */,
 				A01D9FD81D023344005473BD /* Assets.xcassets */,
+				A01D9FD51D023344005473BD /* Main.storyboard */,
 				A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */,
 				A01D9FDD1D023344005473BD /* Info.plist */,
 				A00BB4AA1D06628D009ADBDB /* AppKeys.swift */,

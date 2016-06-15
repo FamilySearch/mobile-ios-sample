@@ -37,21 +37,31 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fsLogo" translatesAutoresizingMaskIntoConstraints="NO" id="eXy-GF-Ttu">
+                                        <rect key="frame" x="160" y="8" width="240" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="7sF-OH-zSA"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="lQh-yI-aK8" secondAttribute="bottom" constant="8" id="9fI-ip-OG5"/>
+                                    <constraint firstItem="Wkf-k2-AOD" firstAttribute="top" secondItem="eXy-GF-Ttu" secondAttribute="bottom" constant="8" id="AdB-mC-m5f"/>
                                     <constraint firstItem="Wkf-k2-AOD" firstAttribute="leading" secondItem="AF0-A7-qNz" secondAttribute="leading" constant="8" id="BDN-Ob-ZjO"/>
                                     <constraint firstItem="VYl-9e-FTv" firstAttribute="centerX" secondItem="AF0-A7-qNz" secondAttribute="centerX" id="K6e-43-mnj"/>
                                     <constraint firstAttribute="height" constant="250" id="L0o-8p-lqD"/>
+                                    <constraint firstItem="eXy-GF-Ttu" firstAttribute="centerX" secondItem="AF0-A7-qNz" secondAttribute="centerX" id="PM3-eq-AfC"/>
                                     <constraint firstAttribute="trailing" secondItem="Wkf-k2-AOD" secondAttribute="trailing" constant="8" id="SyZ-ch-JIN"/>
                                     <constraint firstItem="VYl-9e-FTv" firstAttribute="leading" secondItem="AF0-A7-qNz" secondAttribute="leading" constant="8" id="Szf-nL-xg6"/>
                                     <constraint firstItem="lQh-yI-aK8" firstAttribute="centerX" secondItem="AF0-A7-qNz" secondAttribute="centerX" id="WkR-Gu-3UQ"/>
                                     <constraint firstAttribute="trailing" secondItem="lQh-yI-aK8" secondAttribute="trailing" constant="8" id="Wkc-1o-w9X"/>
                                     <constraint firstItem="VYl-9e-FTv" firstAttribute="top" secondItem="Wkf-k2-AOD" secondAttribute="bottom" constant="8" id="cpK-ii-x9h"/>
                                     <constraint firstItem="lQh-yI-aK8" firstAttribute="top" secondItem="VYl-9e-FTv" secondAttribute="bottom" constant="8" id="fDt-od-Ftd"/>
+                                    <constraint firstAttribute="bottom" secondItem="eXy-GF-Ttu" secondAttribute="bottom" constant="122" id="fZg-lx-1dq"/>
                                     <constraint firstAttribute="trailing" secondItem="VYl-9e-FTv" secondAttribute="trailing" constant="8" id="hIK-AA-V9W"/>
                                     <constraint firstItem="lQh-yI-aK8" firstAttribute="leading" secondItem="AF0-A7-qNz" secondAttribute="leading" constant="8" id="n3z-dh-LXf"/>
+                                    <constraint firstItem="eXy-GF-Ttu" firstAttribute="top" secondItem="AF0-A7-qNz" secondAttribute="top" constant="8" id="qae-5H-tOV"/>
                                     <constraint firstItem="Wkf-k2-AOD" firstAttribute="centerX" secondItem="AF0-A7-qNz" secondAttribute="centerX" id="seF-Ya-SGI"/>
                                 </constraints>
                             </view>
@@ -351,4 +361,7 @@
             <point key="canvasLocation" x="471" y="-368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fsLogo" width="164" height="44"/>
+    </resources>
 </document>
