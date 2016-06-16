@@ -37,8 +37,6 @@ class TreeTVC: UITableViewController {
                     completionQuery: {(responseTemplate, errorQuery) -> Void in
                         if (errorQuery == nil)
                         {
-                            //print("template url = \(responseTemplate!)")
-                            
                             // getAncestryTree
                             self.getAncestryTree(responseTemplate!,
                                 userPersonId: self.user.personId!,
@@ -181,8 +179,8 @@ class TreeTVC: UITableViewController {
         cell.ancestorName.text = person.displayName
         cell.ancestorLifespan.text = person.lifespan
         
-        //print("personLinkHref \(person.personLinkHref)")
-        
+        print("person.personLinkHref! \(person.personLinkHref!)")
+                
         Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 cell.ancestorPicture.image = UIImage(data: data!)

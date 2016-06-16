@@ -120,7 +120,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Asl-Jl-K0C">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genderUnknownCircle2XL" translatesAutoresizingMaskIntoConstraints="NO" id="Asl-Jl-K0C">
                                             <rect key="frame" x="8" y="7" width="64" height="64"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="FPo-yv-hDd"/>
@@ -363,5 +363,6 @@
     </scenes>
     <resources>
         <image name="fsLogo" width="164" height="44"/>
+        <image name="genderUnknownCircle2XL" width="72" height="72"/>
     </resources>
 </document>
