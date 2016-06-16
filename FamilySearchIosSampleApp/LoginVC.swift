@@ -36,59 +36,54 @@ class LoginVC: UIViewController {
     {
         activityIndicator.startAnimating()
         
-        let username = usernameTextFiew.text!
-        let password = passwordTextField.text!
+        guard let
+            username = usernameTextFiew.text,
+            password = passwordTextField.text
+            where !username.isEmpty && !password.isEmpty
+            else {
+                // TODO: display error for empty username or password
+                return
+        }
 
-        if ( !(username.isEmpty) && !(password.isEmpty))
-        {
-            // get initial GET call to collections
-            Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
-                if (error == nil)
-                {
-                    // get the login token
-                    self.getToken(collectionsResponse.tokenUrlString!,
-                        username: username,
-                        password: password,
-                        client_id: AppKeys.API_KEY,
-                        completionToken: {(responseToken, errorToken) -> Void in
-                            if (errorToken != nil)
-                            {
-                                // TODO: handle case when somehow the token is nil
+        // get initial GET call to collections
+        Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
+            
+            guard error == nil else {
+                print("Error getting collections data from server. Error = \(error?.description)")
+                self.activityIndicator.stopAnimating()
+                return
+            }
+
+            // get the login token
+            self.getToken(collectionsResponse.tokenUrlString!,
+                username: username,
+                password: password,
+                client_id: AppKeys.API_KEY,
+                completionToken: {(responseToken, errorToken) -> Void in
+                    guard errorToken == nil else {
+                        // TODO: handle case when somehow the token is nil
+                        return
+                    }
+
+                    // get user data, with the newly acquired token
+                    self.getCurrentUserData(collectionsResponse.currentUserString!,
+                        accessToken: responseToken!,
+                        completionCurrentUser:{(responseUser, errorUser) -> Void in
+                            guard errorToken == nil else {
+                                // TODO: handle case when somehow the user data is nil
+                                return
                             }
-                            else
-                            {
-                                // get user data, with the newly acquired token
-                                self.getCurrentUserData(collectionsResponse.currentUserString!,
-                                    accessToken: responseToken!,
-                                    completionCurrentUser:{(responseUser, errorUser) -> Void in
-                                        if (errorUser != nil)
-                                        {
-                                            // TODO: handle case when somehow the user data is nil
-                                        }
-                                        else
-                                        {
-                                            // all login data needed has been downloaded
-                                            // push to the next view controller, in the main thread
-                                            dispatch_async(dispatch_get_main_queue(),{
-                                                self.performSegueWithIdentifier("segueToTabBar", sender: responseUser)
-                                            })
-                                        }
-                                })
-                            }
-                        }
-                    )
+                            // all login data needed has been downloaded
+                            // push to the next view controller, in the main thread
+                            dispatch_async(dispatch_get_main_queue(),{
+                                self.performSegueWithIdentifier("segueToTabBar", sender: responseUser)
+                            })
+                            
+                    })
+                    
                 }
-                else
-                {
-                    print("Error getting collections data from server. Error = \(error?.description)")
-                    self.activityIndicator.stopAnimating()
-                }
-            })
-        }
-        else
-        {
-            // TODO: display error for empty username or password
-        }
+            )
+        })
     }
     
     func getToken(tokenUrlAsString : String, username : String, password : String, client_id : String, completionToken:(responseToken:String?, errorToken:NSError?) -> ()) {
