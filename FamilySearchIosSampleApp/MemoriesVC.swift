@@ -11,11 +11,11 @@ import UIKit
 
 class MemoriesVC : UICollectionViewController
 {
-    var user : User!
+    var user : User?
     
     let arrayOfImageThumbnailHrefs = NSMutableArray()
     
-    var accessToken : String!
+    var accessToken : String?
     
     override func viewDidLoad() {
         
@@ -52,7 +52,7 @@ class MemoriesVC : UICollectionViewController
         configuration.HTTPAdditionalHeaders = headers;
         let session = NSURLSession(configuration: configuration)
         
-        let memoriesTask = session.dataTaskWithURL(NSURL(string:user.artifactsHref!)! ) { (memoriesData, response, memoriesError) in
+        let memoriesTask = session.dataTaskWithURL(NSURL(string:user!.artifactsHref!)! ) { [weak self] (memoriesData, response, memoriesError) in
             do
             {
                 let memoriesDataJson = try NSJSONSerialization.JSONObjectWithData(memoriesData!, options: .AllowFragments);
@@ -65,16 +65,16 @@ class MemoriesVC : UICollectionViewController
                     if (mediaType == "image/jpeg")
                     {
                         let links = sourceDescription["links"] as? NSDictionary
-                        let linkImageThumbnail = links!["image-thumbnail"] as? NSDictionary
+                        let linkImageThumbnail = links?["image-thumbnail"] as? NSDictionary
                         let linkImageThumbnailHref = linkImageThumbnail!["href"] as? String
-                        self.arrayOfImageThumbnailHrefs.addObject(linkImageThumbnailHref!)
+                        self?.arrayOfImageThumbnailHrefs.addObject(linkImageThumbnailHref!)
                     }
                     else
                     {
                         continue
                     }
                 }
-                completionLinks(responseLinks: self.arrayOfImageThumbnailHrefs, errorLinks: nil)
+                completionLinks(responseLinks: self?.arrayOfImageThumbnailHrefs, errorLinks: nil)
             }
             catch
             {
@@ -98,7 +98,7 @@ class MemoriesVC : UICollectionViewController
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemoryCell", forIndexPath: indexPath) as! MemoryCell
         
         let linkHref = arrayOfImageThumbnailHrefs.objectAtIndex(indexPath.row) as! String
-        Utilities.getImageFromUrl(linkHref, accessToken: accessToken) { (data, response, error)  in
+        Utilities.getImageFromUrl(linkHref, accessToken: accessToken!) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 cell.memoryImageView.image = UIImage(data: data!)
             }

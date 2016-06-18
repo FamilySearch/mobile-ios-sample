@@ -171,9 +171,9 @@ class LoginVC: UIViewController {
                         
                         // The Memories activity will need the URL that comes from user.links.artifact.href
                         // in order to get the memories data
-                        let links = userJsonObject["links"] as! NSDictionary
-                        let artifacts = links["artifacts"] as! NSDictionary
-                        user.artifactsHref = artifacts["href"] as? String
+                        let links = userJsonObject["links"] as? NSDictionary
+                        let artifacts = links!["artifacts"] as? NSDictionary
+                        user.artifactsHref = artifacts!["href"] as? String
                         
                         completionCurrentUser(responseUser:user, errorUser:nil)
                         
@@ -201,13 +201,17 @@ class LoginVC: UIViewController {
             let tabBarController : UITabBarController = (segue.destinationViewController as? UITabBarController)!
             tabBarController.tabBar.items![0].title = NSLocalizedString("tabAncestorsName", comment: "name for list tab")
             tabBarController.tabBar.items![1].title = NSLocalizedString("tabMemoriesName", comment: "name for memories tab")
-
-            let treeTVC : TreeTVC = (tabBarController.viewControllers![0] as? TreeTVC)!
+            
+            guard let treeTVC = tabBarController.viewControllers![0] as? TreeTVC else {
+                fatalError("The first viewController in the tabBarController should be an instance of TreeTVC")
+            }
             // need to pass a User object to the tree table view controller
             treeTVC.user = sender as? User
             
-            let memoriesVC : MemoriesVC = (tabBarController.viewControllers![1] as? MemoriesVC)!
-            memoriesVC.user = sender as! User
+            guard let memoriesVC = tabBarController.viewControllers![1] as? MemoriesVC else {
+                fatalError("The second viewController in the tabBarController should be an instance of MemoriesVC")
+            }
+            memoriesVC.user = sender as? User
             
             self.activityIndicator.stopAnimating()
         }
