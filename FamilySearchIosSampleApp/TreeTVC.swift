@@ -13,11 +13,11 @@ class TreeTVC: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var navItemTitle: UINavigationItem!
     
-    var user : User!
+    var user : User?
     
     var personArray = NSArray()
     
-    var accessToken : String!
+    var accessToken : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,30 +29,30 @@ class TreeTVC: UITableViewController {
         accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
         
         // get url for family tree from Collections
-        Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
+        Utilities.getUrlsFromCollections({ [weak self] (collectionsResponse, error) -> Void in
             if (error == nil)
             {
                 // download the Ancestry query url
-                self.getAncestryQueryUrlAsString(collectionsResponse.familyTreeUrlString!,
+                self?.getAncestryQueryUrlAsString(collectionsResponse.familyTreeUrlString!,
                     completionQuery: {(responseTemplate, errorQuery) -> Void in
                         if (errorQuery == nil)
                         {
                             // getAncestryTree
-                            self.getAncestryTree(responseTemplate!,
-                                userPersonId: self.user.personId!,
-                                accessToken: self.accessToken!,
+                            self?.getAncestryTree(responseTemplate!,
+                                userPersonId: (self?.user!.personId!)!,
+                                accessToken: (self?.accessToken!)!,
                                 completionTree:{(responsePersons, errorTree) -> Void in
                                     if (errorTree == nil)
                                     {
                                         // set the received array, update table
-                                        self.personArray = responsePersons! as NSArray as! [Person]
+                                        self?.personArray = responsePersons! as NSArray as! [Person]
                                         dispatch_async(dispatch_get_main_queue(),{
                                             
                                             // remove loading spinner view from tvc
-                                            Utilities.removeWaitingView(self.view)
+                                            Utilities.removeWaitingView((self?.view)!)
                                             
                                             // update table view
-                                            self.tableView.reloadData()
+                                            self?.tableView.reloadData()
                                         })
                                     }
                                 })
@@ -179,7 +179,7 @@ class TreeTVC: UITableViewController {
         cell.ancestorName.text = person.displayName
         cell.ancestorLifespan.text = person.lifespan
                         
-        Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken) { (data, response, error)  in
+        Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken!) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 cell.ancestorPicture.image = UIImage(data: data!)
             }

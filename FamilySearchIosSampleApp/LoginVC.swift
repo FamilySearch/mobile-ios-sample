@@ -46,16 +46,16 @@ class LoginVC: UIViewController {
         }
 
         // get initial GET call to collections
-        Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
+        Utilities.getUrlsFromCollections({ [weak self] (collectionsResponse, error) -> Void in
             
             guard error == nil else {
                 print("Error getting collections data from server. Error = \(error?.description)")
-                self.activityIndicator.stopAnimating()
+                self?.activityIndicator.stopAnimating()
                 return
             }
 
             // get the login token
-            self.getToken(collectionsResponse.tokenUrlString!,
+            self?.getToken(collectionsResponse.tokenUrlString!,
                 username: username,
                 password: password,
                 client_id: AppKeys.API_KEY,
@@ -66,7 +66,7 @@ class LoginVC: UIViewController {
                     }
 
                     // get user data, with the newly acquired token
-                    self.getCurrentUserData(collectionsResponse.currentUserString!,
+                    self?.getCurrentUserData(collectionsResponse.currentUserString!,
                         accessToken: responseToken!,
                         completionCurrentUser:{(responseUser, errorUser) -> Void in
                             guard errorToken == nil else {
@@ -204,7 +204,7 @@ class LoginVC: UIViewController {
 
             let treeTVC : TreeTVC = (tabBarController.viewControllers![0] as? TreeTVC)!
             // need to pass a User object to the tree table view controller
-            treeTVC.user = sender as! User
+            treeTVC.user = sender as? User
             
             let memoriesVC : MemoriesVC = (tabBarController.viewControllers![1] as? MemoriesVC)!
             memoriesVC.user = sender as! User
