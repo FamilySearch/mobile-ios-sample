@@ -76,7 +76,8 @@ class LoginVC: UIViewController {
                             // all login data needed has been downloaded
                             // push to the next view controller, in the main thread
                             dispatch_async(dispatch_get_main_queue(),{
-                                self.performSegueWithIdentifier("segueToTabBar", sender: responseUser)
+                                [weak self] in
+                                self?.performSegueWithIdentifier("segueToTabBar", sender: responseUser)
                             })
                             
                     })
@@ -101,32 +102,29 @@ class LoginVC: UIViewController {
         request.HTTPMethod = "POST"
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request){ data, response, error in
-            if (error != nil)
-            {
+            guard error == nil else {
                 print("Error downloading token. Error: \(error)")
                 completionToken(responseToken: nil, errorToken: error)
+                return
             }
-            else
+            do
             {
-                do
+                let jsonToken = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments);
+                if let token = jsonToken["access_token"] as? String
                 {
-                    let jsonToken = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments);
-                    if let token = jsonToken["access_token"] as? String
-                    {
-                        // parse the json to get the access_token, and save this token in NSUserDefaults
-                        let preferences = NSUserDefaults.standardUserDefaults()
-                        preferences.setValue(token, forKey: Utilities.KEY_ACCESS_TOKEN)
-                        preferences.synchronize()
-                    
-                        completionToken(responseToken: token, errorToken: nil)
-                    }
-                }
-                catch
-                {
-                    print("Error parsing token JSON. Error: \(error)");
-                }
+                    // parse the json to get the access_token, and save this token in NSUserDefaults
+                    let preferences = NSUserDefaults.standardUserDefaults()
+                    preferences.setValue(token, forKey: Utilities.KEY_ACCESS_TOKEN)
+                    preferences.synchronize()
                 
+                    completionToken(responseToken: token, errorToken: nil)
+                }
             }
+            catch
+            {
+                print("Error parsing token JSON. Error: \(error)");
+            }
+                
         }
         
         task.resume()
@@ -151,31 +149,38 @@ class LoginVC: UIViewController {
                 if let usersJsonObject = currentUserJson["users"] as? [[String : AnyObject]]
                 {
                     let user = User()
-                    let userJsonObject = usersJsonObject.first!
+                    guard usersJsonObject.first == nil else
+                    {
+                        let userJsonObject = usersJsonObject.first!
+
+                        user.id = userJsonObject["id"] as? String
+                        user.contactName = userJsonObject["contactName"] as? String
+                        user.helperAccessPin = userJsonObject["helperAccessPin"] as? String
+                        user.givenName = userJsonObject["givenName"] as? String
+                        user.familyName = userJsonObject["familyName"] as? String
+                        user.email = userJsonObject["email"] as? String
+                        user.country = userJsonObject["country"] as? String
+                        user.gender = userJsonObject["gender"] as? String
+                        user.birthDate = userJsonObject["birthDate"] as? String
+                        user.phoneNumber = userJsonObject["phoneNumber"] as? String
+                        user.mailingAddress = userJsonObject["mailingAddress"] as? String
+                        user.preferredLanguage = userJsonObject["preferredLanguage"] as? String
+                        user.displayName = userJsonObject["displayName"] as? String
+                        user.personId = userJsonObject["personId"] as? String
+                        user.treeUserId = userJsonObject["treeUserId"] as? String
+                        
+                        // The Memories activity will need the URL that comes from user.links.artifact.href
+                        // in order to get the memories data
+                        let links = userJsonObject["links"] as! NSDictionary
+                        let artifacts = links["artifacts"] as! NSDictionary
+                        user.artifactsHref = artifacts["href"] as? String
+                        
+                        completionCurrentUser(responseUser:user, errorUser:nil)
+                        
+                        return
+                    }
                     
-                    user.id = userJsonObject["id"] as? String
-                    user.contactName = userJsonObject["contactName"] as? String
-                    user.helperAccessPin = userJsonObject["helperAccessPin"] as? String
-                    user.givenName = userJsonObject["givenName"] as? String
-                    user.familyName = userJsonObject["familyName"] as? String
-                    user.email = userJsonObject["email"] as? String
-                    user.country = userJsonObject["country"] as? String
-                    user.gender = userJsonObject["gender"] as? String
-                    user.birthDate = userJsonObject["birthDate"] as? String
-                    user.phoneNumber = userJsonObject["phoneNumber"] as? String
-                    user.mailingAddress = userJsonObject["mailingAddress"] as? String
-                    user.preferredLanguage = userJsonObject["preferredLanguage"] as? String
-                    user.displayName = userJsonObject["displayName"] as? String
-                    user.personId = userJsonObject["personId"] as? String
-                    user.treeUserId = userJsonObject["treeUserId"] as? String
-                    
-                    // The Memories activity will need the URL that comes from user.links.artifact.href
-                    // in order to get the memories data
-                    let links = userJsonObject["links"] as! NSDictionary
-                    let artifacts = links["artifacts"] as! NSDictionary
-                    user.artifactsHref = artifacts["href"] as? String
-                    
-                    completionCurrentUser(responseUser:user, errorUser:nil)
+                    completionCurrentUser(responseUser:nil, errorUser:nil)
                 }
 
             }

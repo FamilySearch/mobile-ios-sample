@@ -96,6 +96,7 @@ class AncestorDetails : UIViewController
                     let person = persons.first
                     
                     let display = person!["display"] as! NSDictionary
+                    
                     let birthDate = display["birthDate"] as! String
                     let deathDate = display["deathDate"] as! String
                     

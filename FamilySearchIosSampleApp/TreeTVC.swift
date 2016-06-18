@@ -178,9 +178,7 @@ class TreeTVC: UITableViewController {
         let person = personArray.objectAtIndex(indexPath.row) as! Person
         cell.ancestorName.text = person.displayName
         cell.ancestorLifespan.text = person.lifespan
-        
-        print("person.personLinkHref! \(person.personLinkHref!)")
-                
+                        
         Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 cell.ancestorPicture.image = UIImage(data: data!)
