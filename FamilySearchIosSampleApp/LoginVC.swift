@@ -149,10 +149,9 @@ class LoginVC: UIViewController {
                 if let usersJsonObject = currentUserJson["users"] as? [[String : AnyObject]]
                 {
                     let user = User()
-                    guard usersJsonObject.first == nil else
+                    
+                    if let userJsonObject = usersJsonObject.first
                     {
-                        let userJsonObject = usersJsonObject.first!
-
                         user.id = userJsonObject["id"] as? String
                         user.contactName = userJsonObject["contactName"] as? String
                         user.helperAccessPin = userJsonObject["helperAccessPin"] as? String
@@ -179,6 +178,10 @@ class LoginVC: UIViewController {
                         
                         return
                     }
+                    else
+                    {
+                        print("The user JSON does not contain any data")
+                    }
                     
                     completionCurrentUser(responseUser:nil, errorUser:nil)
                 }
@@ -202,13 +205,13 @@ class LoginVC: UIViewController {
             tabBarController.tabBar.items![0].title = NSLocalizedString("tabAncestorsName", comment: "name for list tab")
             tabBarController.tabBar.items![1].title = NSLocalizedString("tabMemoriesName", comment: "name for memories tab")
             
-            guard let treeTVC = tabBarController.viewControllers![0] as? TreeTVC else {
+            guard let treeTVC = tabBarController.viewControllers?[0] as? TreeTVC else {
                 fatalError("The first viewController in the tabBarController should be an instance of TreeTVC")
             }
             // need to pass a User object to the tree table view controller
             treeTVC.user = sender as? User
             
-            guard let memoriesVC = tabBarController.viewControllers![1] as? MemoriesVC else {
+            guard let memoriesVC = tabBarController.viewControllers?[1] as? MemoriesVC else {
                 fatalError("The second viewController in the tabBarController should be an instance of MemoriesVC")
             }
             memoriesVC.user = sender as? User

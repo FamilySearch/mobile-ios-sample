@@ -52,7 +52,11 @@ class MemoriesVC : UICollectionViewController
         configuration.HTTPAdditionalHeaders = headers;
         let session = NSURLSession(configuration: configuration)
         
-        let memoriesTask = session.dataTaskWithURL(NSURL(string:user!.artifactsHref!)! ) { [weak self] (memoriesData, response, memoriesError) in
+        guard let memoriesHref = NSURL(string: user!.artifactsHref!) else {
+            return
+        }
+        
+        let memoriesTask = session.dataTaskWithURL(memoriesHref) { [weak self] (memoriesData, response, memoriesError) in
             do
             {
                 let memoriesDataJson = try NSJSONSerialization.JSONObjectWithData(memoriesData!, options: .AllowFragments);
@@ -97,10 +101,14 @@ class MemoriesVC : UICollectionViewController
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemoryCell", forIndexPath: indexPath) as! MemoryCell
         
-        let linkHref = arrayOfImageThumbnailHrefs.objectAtIndex(indexPath.row) as! String
-        Utilities.getImageFromUrl(linkHref, accessToken: accessToken!) { (data, response, error)  in
+        let linkHref = arrayOfImageThumbnailHrefs.objectAtIndex(indexPath.row) as? String
+        Utilities.getImageFromUrl(linkHref!, accessToken: accessToken!) { (data, response, error)  in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                cell.memoryImageView.image = UIImage(data: data!)
+                guard let imageData = data else {
+                    // no image data
+                    return
+                }
+                cell.memoryImageView.image = UIImage(data: imageData)
             }
         }
         

@@ -45,7 +45,7 @@ class TreeTVC: UITableViewController {
                                     if (errorTree == nil)
                                     {
                                         // set the received array, update table
-                                        self?.personArray = responsePersons! as NSArray as! [Person]
+                                        self?.personArray = (responsePersons! as NSArray as? [Person])!
                                         dispatch_async(dispatch_get_main_queue(),{
                                             
                                             // remove loading spinner view from tvc

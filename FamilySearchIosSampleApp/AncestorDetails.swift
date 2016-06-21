@@ -80,13 +80,16 @@ class AncestorDetails : UIViewController
                                 accessToken:String,
                                 completionAncestorDetails:(responseDetails: PersonDetails?, reponseError:NSError?) -> ())
     {
-        let ancestorDetailsUrl = NSURL(string: personUrlString!);
+        
+        guard let personUrlString = personUrlString, ancestorDetailsUrl = NSURL(string: personUrlString) else {
+            return
+        }
 
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration();
         let headers: [NSObject : AnyObject] = ["Accept":"application/json", "Authorization":"Bearer " + accessToken];
         configuration.HTTPAdditionalHeaders = headers;
         let session = NSURLSession(configuration: configuration)
-        let ancestorDetailDataTask = session.dataTaskWithURL(ancestorDetailsUrl!) { (ancestorData, ancestorResponse, ancestorError) in
+        let ancestorDetailDataTask = session.dataTaskWithURL(ancestorDetailsUrl) { (ancestorData, ancestorResponse, ancestorError) in
             if (ancestorError == nil)
             {
                 do
