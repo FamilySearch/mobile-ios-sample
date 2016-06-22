@@ -19,10 +19,16 @@ class TreeTVC: UITableViewController {
     
     var accessToken : String?
     
+    let cache = NSCache()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Utilities.displayWaitingView(self.view)
+        
+        // set cache limits to 20 images or 10mb
+        cache.countLimit = 50
+        cache.totalCostLimit = 30*1024*1024
         
         // get the access token from NSUserDefaults
         let preferences = NSUserDefaults.standardUserDefaults()
@@ -178,11 +184,29 @@ class TreeTVC: UITableViewController {
         let person = personArray.objectAtIndex(indexPath.row) as! Person
         cell.ancestorName.text = person.displayName
         cell.ancestorLifespan.text = person.lifespan
-                        
-        Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken!) { (data, response, error)  in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                cell.ancestorPicture.image = UIImage(data: data!)
+        
+        // set default ancestorImage to display while scrolling
+        cell.ancestorPicture.image = UIImage(named: "genderUnknownCircle2XL")
+        
+        // the code below is to create an image cache
+        var ancestorImage = UIImage()
+        if let cachedImage = cache.objectForKey(person.personLinkHref!) as? UIImage
+        {
+            // image exists in cache, so use the cached image
+            ancestorImage = cachedImage
+            cell.ancestorPicture.image = ancestorImage
+        }
+        else
+        {
+            // no image found in cache, so need to create cached image from download service
+            Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken!) { (data, response, error)  in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    ancestorImage = UIImage(data: data!)!
+                    self.cache.setObject(ancestorImage, forKey: person.personLinkHref!)
+                    cell.ancestorPicture.image = ancestorImage
+                }
             }
+
         }
         
         return cell
