@@ -102,14 +102,23 @@ class MemoriesVC : UICollectionViewController
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemoryCell", forIndexPath: indexPath) as! MemoryCell
         
         let linkHref = arrayOfImageThumbnailHrefs.objectAtIndex(indexPath.row) as? String
-        Utilities.getImageFromUrl(linkHref!, accessToken: accessToken!) { (data, response, error)  in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                guard let imageData = data else {
-                    // no image data
-                    return
+        
+        // make sure the link and token variables are not nil
+        if let link = linkHref, token = accessToken
+        {
+            Utilities.getImageFromUrl(link, accessToken: token) { (data, response, error)  in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    guard let imageData = data else {
+                        // no image data
+                        return
+                    }
+                    cell.memoryImageView.image = UIImage(data: imageData)
                 }
-                cell.memoryImageView.image = UIImage(data: imageData)
             }
+        }
+        else
+        {
+            // TODO: handle case for when linkHref or accessToken are nil
         }
         
         return cell

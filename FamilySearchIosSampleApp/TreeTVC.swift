@@ -188,25 +188,32 @@ class TreeTVC: UITableViewController {
         // set default ancestorImage to display while scrolling
         cell.ancestorPicture.image = UIImage(named: "genderUnknownCircle2XL")
         
-        // the code below is to create an image cache
-        var ancestorImage = UIImage()
-        if let cachedImage = cache.objectForKey(person.personLinkHref!) as? UIImage
+        if let imageLink = person.personLinkHref
         {
-            // image exists in cache, so use the cached image
-            ancestorImage = cachedImage
-            cell.ancestorPicture.image = ancestorImage
+            // the code below is to create an image cache
+            var ancestorImage = UIImage()
+            if let cachedImage = cache.objectForKey(imageLink) as? UIImage
+            {
+                // image exists in cache, so use the cached image
+                ancestorImage = cachedImage
+                cell.ancestorPicture.image = ancestorImage
+            }
+            else
+            {
+                // no image found in cache, so need to create cached image from download service
+                Utilities.getImageFromUrl(imageLink, accessToken: accessToken!) { (data, response, error)  in
+                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                        ancestorImage = UIImage(data: data!)!
+                        self.cache.setObject(ancestorImage, forKey: imageLink)
+                        cell.ancestorPicture.image = ancestorImage
+                    }
+                }
+                
+            }
         }
         else
         {
-            // no image found in cache, so need to create cached image from download service
-            Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken!) { (data, response, error)  in
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    ancestorImage = UIImage(data: data!)!
-                    self.cache.setObject(ancestorImage, forKey: person.personLinkHref!)
-                    cell.ancestorPicture.image = ancestorImage
-                }
-            }
-
+            // TODO: handle case for when the image link is nil
         }
         
         return cell
