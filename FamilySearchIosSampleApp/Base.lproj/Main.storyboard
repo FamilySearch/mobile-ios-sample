@@ -120,7 +120,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Asl-Jl-K0C">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genderUnknownCircle2XL" translatesAutoresizingMaskIntoConstraints="NO" id="Asl-Jl-K0C">
                                             <rect key="frame" x="8" y="7" width="64" height="64"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="FPo-yv-hDd"/>
@@ -163,7 +163,7 @@
                             <outlet property="delegate" destination="7Ef-zT-K2F" id="ttD-BM-uNt"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Kwl-uh-q35"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="hierarchy" id="Kwl-uh-q35"/>
                     <connections>
                         <segue destination="TYP-5a-Xvq" kind="show" identifier="segueToAncestorDetails" id="Keo-Ha-mga"/>
                     </connections>
@@ -210,7 +210,7 @@
                             <outlet property="delegate" destination="PpE-fz-ovQ" id="SDp-65-LHQ"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Item" id="vNg-gr-LnA"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="filmRoll" id="vNg-gr-LnA"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRH-HG-B5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -362,6 +362,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="filmRoll" width="30" height="30"/>
         <image name="fsLogo" width="164" height="44"/>
+        <image name="genderUnknownCircle2XL" width="72" height="72"/>
+        <image name="hierarchy" width="30" height="30"/>
     </resources>
 </document>

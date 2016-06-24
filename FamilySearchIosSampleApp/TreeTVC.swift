@@ -13,48 +13,52 @@ class TreeTVC: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var navItemTitle: UINavigationItem!
     
-    var user : User!
+    var user : User?
     
     var personArray = NSArray()
     
-    var accessToken : String!
+    var accessToken : String?
+    
+    let cache = NSCache()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Utilities.displayWaitingView(self.view)
         
+        // set cache limits to 20 images or 10mb
+        cache.countLimit = 50
+        cache.totalCostLimit = 30*1024*1024
+        
         // get the access token from NSUserDefaults
         let preferences = NSUserDefaults.standardUserDefaults()
         accessToken = preferences.stringForKey(Utilities.KEY_ACCESS_TOKEN)
         
         // get url for family tree from Collections
-        Utilities.getUrlsFromCollections({ (collectionsResponse, error) -> Void in
+        Utilities.getUrlsFromCollections({ [weak self] (collectionsResponse, error) -> Void in
             if (error == nil)
             {
                 // download the Ancestry query url
-                self.getAncestryQueryUrlAsString(collectionsResponse.familyTreeUrlString!,
+                self?.getAncestryQueryUrlAsString(collectionsResponse.familyTreeUrlString!,
                     completionQuery: {(responseTemplate, errorQuery) -> Void in
                         if (errorQuery == nil)
                         {
-                            //print("template url = \(responseTemplate!)")
-                            
                             // getAncestryTree
-                            self.getAncestryTree(responseTemplate!,
-                                userPersonId: self.user.personId!,
-                                accessToken: self.accessToken!,
+                            self?.getAncestryTree(responseTemplate!,
+                                userPersonId: (self?.user!.personId!)!,
+                                accessToken: (self?.accessToken!)!,
                                 completionTree:{(responsePersons, errorTree) -> Void in
                                     if (errorTree == nil)
                                     {
                                         // set the received array, update table
-                                        self.personArray = responsePersons! as NSArray as! [Person]
+                                        self?.personArray = (responsePersons! as NSArray as? [Person])!
                                         dispatch_async(dispatch_get_main_queue(),{
                                             
                                             // remove loading spinner view from tvc
-                                            Utilities.removeWaitingView(self.view)
+                                            Utilities.removeWaitingView((self?.view)!)
                                             
                                             // update table view
-                                            self.tableView.reloadData()
+                                            self?.tableView.reloadData()
                                         })
                                     }
                                 })
@@ -181,12 +185,35 @@ class TreeTVC: UITableViewController {
         cell.ancestorName.text = person.displayName
         cell.ancestorLifespan.text = person.lifespan
         
-        //print("personLinkHref \(person.personLinkHref)")
+        // set default ancestorImage to display while scrolling
+        cell.ancestorPicture.image = UIImage(named: "genderUnknownCircle2XL")
         
-        Utilities.getImageFromUrl(person.personLinkHref!, accessToken: accessToken) { (data, response, error)  in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                cell.ancestorPicture.image = UIImage(data: data!)
+        if let imageLink = person.personLinkHref
+        {
+            // the code below is to create an image cache
+            var ancestorImage = UIImage()
+            if let cachedImage = cache.objectForKey(imageLink) as? UIImage
+            {
+                // image exists in cache, so use the cached image
+                ancestorImage = cachedImage
+                cell.ancestorPicture.image = ancestorImage
             }
+            else
+            {
+                // no image found in cache, so need to create cached image from download service
+                Utilities.getImageFromUrl(imageLink, accessToken: accessToken!) { (data, response, error)  in
+                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                        ancestorImage = UIImage(data: data!)!
+                        self.cache.setObject(ancestorImage, forKey: imageLink)
+                        cell.ancestorPicture.image = ancestorImage
+                    }
+                }
+                
+            }
+        }
+        else
+        {
+            // TODO: handle case for when the image link is nil
         }
         
         return cell
