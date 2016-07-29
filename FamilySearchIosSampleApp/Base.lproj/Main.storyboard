@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="76P-iA-8Ej">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="76P-iA-8Ej">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -96,7 +96,7 @@
                         <outlet property="dataUsageLabel" destination="1Lb-Dw-UQR" id="vFk-IY-31B"/>
                         <outlet property="loginButtonOutlet" destination="lQh-yI-aK8" id="UDB-cH-ysZ"/>
                         <outlet property="passwordTextField" destination="VYl-9e-FTv" id="Wr1-3A-i8m"/>
-                        <outlet property="usernameTextFiew" destination="Wkf-k2-AOD" id="NbK-2D-lP0"/>
+                        <outlet property="usernameTextField" destination="Wkf-k2-AOD" id="RpD-Ll-pTP"/>
                         <segue destination="8fr-uN-lL0" kind="show" identifier="segueToTabBar" id="GTg-wd-YER"/>
                     </connections>
                 </viewController>
@@ -117,7 +117,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbt-lG-rh8" id="nqE-ca-cZM">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genderUnknownCircle2XL" translatesAutoresizingMaskIntoConstraints="NO" id="Asl-Jl-K0C">
