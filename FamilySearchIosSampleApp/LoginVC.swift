@@ -10,7 +10,7 @@ import UIKit
 
 class LoginVC: UIViewController {
     
-    @IBOutlet weak var usernameTextFiew: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButtonOutlet: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -18,10 +18,10 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+        unlockScreen()
         
-        activityIndicator.stopAnimating()
-        
-        usernameTextFiew.placeholder = NSLocalizedString("usernamePlaceholderText", comment: "username, in email form")
+        usernameTextField.placeholder = NSLocalizedString("usernamePlaceholderText", comment: "username, in email form")
         passwordTextField.placeholder = NSLocalizedString("passwordPlaceholderText", comment: "password")
         loginButtonOutlet.setTitle(NSLocalizedString("loginText", comment: "text for login button"), forState: UIControlState.Normal)
         dataUsageLabel.text = NSLocalizedString("loginDataUsage", comment: "description of data usage")
@@ -34,14 +34,15 @@ class LoginVC: UIViewController {
     
     @IBAction func loginAction(sender: AnyObject)
     {
-        activityIndicator.startAnimating()
-        
+        lockScreen()
+
         guard let
-            username = usernameTextFiew.text,
+            username = usernameTextField.text,
             password = passwordTextField.text
             where !username.isEmpty && !password.isEmpty
             else {
-                // TODO: display error for empty username or password
+                self.showAlert("Error", description: "User name or password missing")
+                unlockScreen()
                 return
         }
 
@@ -61,7 +62,11 @@ class LoginVC: UIViewController {
                 client_id: AppKeys.API_KEY,
                 completionToken: {(responseToken, errorToken) -> Void in
                     guard errorToken == nil else {
-                        // TODO: handle case when somehow the token is nil
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self!.showAlert("Error", description: errorToken!.localizedDescription)
+                            self!.unlockScreen()
+                        })
+
                         return
                     }
 
@@ -70,7 +75,10 @@ class LoginVC: UIViewController {
                         accessToken: responseToken!,
                         completionCurrentUser:{(responseUser, errorUser) -> Void in
                             guard errorToken == nil else {
-                                // TODO: handle case when somehow the user data is nil
+                                dispatch_async(dispatch_get_main_queue(),{
+                                    self!.showAlert("Error", description: errorToken!.localizedDescription)
+                                    self!.unlockScreen()
+                                })
                                 return
                             }
                             // all login data needed has been downloaded
@@ -110,6 +118,16 @@ class LoginVC: UIViewController {
             do
             {
                 let jsonToken = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments);
+                
+                if let error = jsonToken["error"] as? String
+                {
+                    let description = jsonToken["error_description"] as? String
+                    print("\(error) \(description)")
+                    
+                    let userInfo = [NSLocalizedDescriptionKey : description!]
+                    completionToken(responseToken: nil, errorToken: NSError(domain: "FamilySearch", code: 1, userInfo: userInfo))
+                }
+                
                 if let token = jsonToken["access_token"] as? String
                 {
                     // parse the json to get the access_token, and save this token in NSUserDefaults
@@ -219,6 +237,19 @@ class LoginVC: UIViewController {
             self.activityIndicator.stopAnimating()
         }
     }
+	
+// MARK: - Private methods
+	private func lockScreen() {
+		usernameTextField.enabled = false
+		passwordTextField.enabled = false
+		activityIndicator.startAnimating()
+	}
+	
+	private func unlockScreen() {
+		usernameTextField.enabled = true
+		passwordTextField.enabled = true
+		activityIndicator.stopAnimating()
+	}
 }
 
 
