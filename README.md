@@ -20,3 +20,5 @@ class AppKeys : NSObject
     static let API_KEY = "your_api_key"
 }
 ```
+### Production and Testing Environments
+To change what tree reference (integration, beta, production) you are using edit the starting URL in `/FamilySearchIosSampleApp/Utilities.swift`
