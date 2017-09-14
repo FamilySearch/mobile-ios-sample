@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EE073E01F69D521006CD2D6 /* AppKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE073DF1F69D521006CD2D6 /* AppKeys.swift */; };
 		5E7D1C301D4BFD5E00874503 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7D1C2E1D4BFB7D00874503 /* Extensions.swift */; };
 		A00150AF1D08FF76008E53E8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00150AE1D08FF76008E53E8 /* User.swift */; };
-		A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AA1D06628D009ADBDB /* AppKeys.swift */; };
 		A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */; };
 		A00FDD3D1D02755700C7384B /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FDD3C1D02755700C7384B /* Links.swift */; };
 		A0151B321D10FBA6008DADD8 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0151B311D10FBA6008DADD8 /* MemoryCell.swift */; };
@@ -29,9 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EE073DF1F69D521006CD2D6 /* AppKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKeys.swift; sourceTree = "<group>"; };
 		5E7D1C2E1D4BFB7D00874503 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A00150AE1D08FF76008E53E8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A00BB4AA1D06628D009ADBDB /* AppKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKeys.swift; sourceTree = "<group>"; };
 		A00BB4AF1D06741E009ADBDB /* TreeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTVC.swift; sourceTree = "<group>"; };
 		A00FDD3C1D02755700C7384B /* Links.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		A0151B311D10FBA6008DADD8 /* MemoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
@@ -103,7 +103,6 @@
 				A01D9FD51D023344005473BD /* Main.storyboard */,
 				A01D9FDA1D023344005473BD /* LaunchScreen.storyboard */,
 				A01D9FDD1D023344005473BD /* Info.plist */,
-				A00BB4AA1D06628D009ADBDB /* AppKeys.swift */,
 				A05168E31D09EDDA005E7EE9 /* Localizable.strings */,
 			);
 			path = FamilySearchIosSampleApp;
@@ -134,6 +133,7 @@
 			children = (
 				A0D6047E1D03D99A00F2A83D /* Utilities.swift */,
 				A03BAE501D106A91002572BA /* WaitingView.swift */,
+				0EE073DF1F69D521006CD2D6 /* AppKeys.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -170,6 +170,8 @@
 				TargetAttributes = {
 					A01D9FCD1D023344005473BD = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = E75E2R8ZH4;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -213,10 +215,10 @@
 				A01D9FD41D023344005473BD /* LoginVC.swift in Sources */,
 				A01B4FBC1D0CFB3600E90D6D /* MemoriesVC.swift in Sources */,
 				A0151B321D10FBA6008DADD8 /* MemoryCell.swift in Sources */,
+				0EE073E01F69D521006CD2D6 /* AppKeys.swift in Sources */,
 				A00FDD3D1D02755700C7384B /* Links.swift in Sources */,
 				A0D6047F1D03D99A00F2A83D /* Utilities.swift in Sources */,
 				A0296F111D0A688A00FAE4E0 /* PersonCell.swift in Sources */,
-				A00BB4AB1D06628D009ADBDB /* AppKeys.swift in Sources */,
 				A00BB4B01D06741E009ADBDB /* TreeTVC.swift in Sources */,
 				A01D9FD21D023344005473BD /* AppDelegate.swift in Sources */,
 				A03BAE511D106A91002572BA /* WaitingView.swift in Sources */,
@@ -339,11 +341,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E75E2R8ZH4;
 				INFOPLIST_FILE = FamilySearchIosSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FamilySearch.IosSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -351,11 +355,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E75E2R8ZH4;
 				INFOPLIST_FILE = FamilySearchIosSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FamilySearch.IosSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

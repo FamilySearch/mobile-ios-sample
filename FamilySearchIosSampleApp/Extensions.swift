@@ -8,14 +8,16 @@
 
 import UIKit
 
-extension UIViewController {	
-    func showAlert(title: String, description: String) {
-        let alertController = UIAlertController(title: title,
-                                                message: description,
-                                                preferredStyle: .Alert)
-
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertController.addAction(defaultAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
+extension UIViewController {
+  
+  func showAlert(_ title: String, description: String) {
+    let alertController = UIAlertController(title: title,
+                                            message: description,
+                                            preferredStyle: .alert)
+    
+    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+    alertController.addAction(defaultAction)
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
 }
